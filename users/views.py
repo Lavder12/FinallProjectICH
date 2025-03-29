@@ -1,12 +1,14 @@
 from urllib.request import HTTPRedirectHandler
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse, reverse_lazy
 
+from web_room.models import Announcement, Reservation
 from .forms import LoginUserForm, RegisterUserForm
 
 
@@ -33,5 +35,15 @@ def logout_user(request):
     return HttpResponseRedirect(reverse('users:login'))
 
 
-def profile(request):
-    return render(request, 'users/profile.html')
+@login_required
+def profile_view(request):
+    # Сдаваемые объявления пользователя
+    my_announcements = Announcement.objects.filter(author=request.user)  # Объявления текущего пользователя
+
+    # Арендованные объекты
+    rented_announcements = Reservation.objects.filter(user=request.user).select_related('announcement')
+
+    return render(request, 'users/profile.html', {
+        'my_announcements': my_announcements,
+        'rented_announcements': [r.announcement for r in rented_announcements],  # Арендованные объявления
+    })

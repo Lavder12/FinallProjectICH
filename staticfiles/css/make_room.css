@@ -1,0 +1,36 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Выравнивание по центру */
+    gap: 10px; /* Отступ между элементами */
+}
+
+form p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+input, button {
+    width: 100%;
+    max-width: 300px; /* Чтобы не растягивались слишком сильно */
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #354036;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+h1, a {
+    text-align: center;
+}

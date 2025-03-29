@@ -6,16 +6,17 @@ from .forms import AnnouncementForm, SearchRoomForm
 from .models import Announcement
 
 
-# Create your views here.
+# Главная страница
 def index(request):
-    return render(request, 'main_page.html')
+    return render(request, 'web_room/main_page.html')
 
 
+# Поиск комнаты
 def find_room(request):
     form = SearchRoomForm(request.GET)
-    posts = Announcement.objects.filter(is_rented=False)  # Добавляем фильтрацию по аренде
+    posts = Announcement.objects.filter(is_rented=False)  # Фильтрация только доступных объявлений
 
-    # Обрабатываем фильтры
+    # Применяем фильтры, если форма валидна
     if form.is_valid():
         search_query = form.cleaned_data.get('q')
         location_query = form.cleaned_data.get('location')
@@ -37,7 +38,7 @@ def find_room(request):
         if type_query:
             posts = posts.filter(type_of_room__icontains=type_query)
 
-    # Обрабатываем сортировку
+    # Обработка сортировки
     sort = request.GET.get("sort", "date_desc")
     sort_mapping = {
         "rating_asc": "rating",
@@ -54,40 +55,48 @@ def find_room(request):
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
-    return render(request, "find_room.html", {
+    # Рендер результата
+    return render(request, "web_room/find_room.html", {
         "form": form,
         "page_obj": page_obj,
         "sort": sort,
     })
 
 
+# Регистрация нового объявления (только для авторизованных пользователей)
 @login_required
 def register_room(request):
     if request.method == "POST":
         form = AnnouncementForm(request.POST, request.FILES)
         if form.is_valid():
-            announcment = form.save(commit=False)
-            announcment.author = request.user
-            announcment.save()
-            return redirect('home')
+            announcement = form.save(commit=False)
+            announcement.author = request.user  # Добавляем автора из модели User
+            announcement.save()
+            return redirect('home')  # Перенаправляем на главную страницу
     else:
-        form = AnnouncementForm()
-    return render(request, "register_room.html", {"form": form})
+        form = AnnouncementForm()  # Пустая форма для GET-запросов
+    return render(request, "web_room/register_room.html", {"form": form})
 
 
+# Детали поста с обработкой аренды
 def post_detail(request, pk):
     post = get_object_or_404(Announcement, pk=pk)
 
     if request.method == 'POST':
-        if not post.is_rented:
+        if not post.is_rented:  # Проверяем, свободна ли комната
             post.is_rented = True
             post.save()
-            return redirect('home')  # Страница успеха бронирования
+            return redirect('home')  # Перенаправляем на главную при успешной аренде
         else:
-            return render(request, 'post_detail.html', {'post': post, 'error': 'Это объявление уже забронировано.'})
+            return render(request, 'web_room/post_detail.html', {
+                'post': post,
+                'error': 'Это объявление уже забронировано.'
+            })
 
-    return render(request, 'post_detail.html', {'post': post})
+    return render(request, 'web_room/post_detail.html', {'post': post})
 
-# def show_post(request):
-#     form = AnnouncementForm()
-#     return render(request, 'women/register_room.html')
+
+# Детали объявления (только просмотр)
+def announcement_detail(request, pk):
+    announcement = get_object_or_404(Announcement, pk=pk)
+    return render(request, 'web_room/announcement_detail.html', {'announcement': announcement})
