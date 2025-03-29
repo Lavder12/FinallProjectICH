@@ -1,0 +1,139 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin: 20px 0;
+}
+
+.post {
+    max-width: 600px;
+    background: #fff;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.post-title a {
+    font-size: 22px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.post-title a:hover {
+    text-decoration: underline;
+}
+
+.post-content {
+    font-size: 16px;
+    color: #555;
+    margin: 10px 0;
+}
+
+.post-image {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.post-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.post-date {
+    font-size: 14px;
+    color: #777;
+    display: block;
+    margin-top: 10px;
+}
+
+.no-posts {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    margin-top: 20px;
+}
+
+.pagination {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.pagination-link {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    background: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.pagination-link:hover {
+    background: #0056b3;
+}
+
+.pagination-info {
+    font-size: 16px;
+    color: #333;
+    margin: 0 10px;
+}
+.post-image {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.post-image img {
+    max-width: 100%;   /* Изображение не будет выходить за границы блока */
+    width: auto;       /* Автоматическая ширина */
+    height: auto;      /* Сохранение пропорций */
+    max-height: 300px; /* Ограничиваем высоту */
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain; /* Предотвращаем растяжение */
+}
+.post {
+    max-width: 600px; /* Ограничиваем ширину блока */
+    margin: 20px auto; /* Центрируем */
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    word-wrap: break-word; /* Перенос длинных слов */
+    overflow-wrap: break-word; /* Альтернативный способ переноса */
+}
+
+.post h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.post p {
+    font-size: 16px;
+    line-height: 1.5;
+    word-break: break-word; /* Предотвращает выход текста за границы */
+}
+
+.post-image {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.post-image img {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px; /* Ограничиваем высоту */
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+}

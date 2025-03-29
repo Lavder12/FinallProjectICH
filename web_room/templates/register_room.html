@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/make_room.css' %}">
+{% endblock extra_css %}
+{% block title %}О Нас{% endblock title %}
+{% block header %}О Нас{% endblock header %}
+{% block content %}
+<h1>Добавить объявление</h1>
+<form method="post" enctype="multipart/form-data">  <!-- ОБЯЗАТЕЛЬНО добавь enctype -->
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Создать объявление</button>
+</form>
+
+{% endblock content %}

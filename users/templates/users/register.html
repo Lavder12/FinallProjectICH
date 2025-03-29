@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}" type="text/css">
+{% endblock extra_css %}
+
+{% block title %}Регистрация{% endblock title %}
+{% block header %}Регистрация{% endblock header %}
+
+{% block content %}
+<h1>Регистрация</h1>
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    {{ form.as_p }}
+    <button type="submit">Регистрация</button>
+</form>
+<h1>Есть аккаунт ?</h1>
+<a href="{% url 'users:login'%}"><h3>Войти</h3></a>
+{% endblock content %}
