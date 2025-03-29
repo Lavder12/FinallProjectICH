@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a7851674-29f0-4514-a113-cad4af2e3a93" name="Changes" comment="Реализовано сортировка, и поиск жилья">
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/announcements/dortmund.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/announcements/dortmund_QwlwTL4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/announcements/изображение_2025-03-29_205706308.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web_room/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/web_room/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web_room/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/web_room/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web_room/static/css/post_det.css" beforeDir="false" afterPath="$PROJECT_DIR$/web_room/static/css/post_det.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web_room/templates/post_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/web_room/templates/post_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web_room/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/web_room/views.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Lavder12&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Lavder12/FinallProjectICH.git&quot;,
+    &quot;accountId&quot;: &quot;fc5c37fa-d255-4ea9-8430-1ebacb3594fb&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2uwnPdIyqIp3NctETHoRkhzRlzs" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.test.executor": "Run",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
+    "django.template.preview.state": "SHOW_EDITOR",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/Home0/PycharmProjects/FinallProjectICH/web/static/img",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.editor",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Home0\PycharmProjects\FinallProjectICH\web\static\img" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Home0\PycharmProjects\FinallProjectICH\users\static\css" />
+      <recent name="C:\Users\Home0\PycharmProjects\FinallProjectICH\main\static\users\css" />
+      <recent name="C:\Users\Home0\PycharmProjects\FinallProjectICH\main\static\users" />
+      <recent name="C:\Users\Home0\PycharmProjects\FinallProjectICH\main\static\css" />
+      <recent name="C:\Users\Home0\PycharmProjects\FinallProjectICH\web_room\static\css" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="FinallProjectICH" type="Python.DjangoServer" factoryName="Django server">
+      <module name="FinallProjectICH" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-PY-243.25659.43" />
+        <option value="bundled-python-sdk-181015f7ab06-4df51de95216-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.25659.43" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a7851674-29f0-4514-a113-cad4af2e3a93" name="Changes" comment="" />
+      <created>1743168480757</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1743168480757</updated>
+      <workItem from="1743168481818" duration="394000" />
+      <workItem from="1743192580594" duration="583000" />
+      <workItem from="1743193182910" duration="64000" />
+      <workItem from="1743193263415" duration="7000" />
+      <workItem from="1743193293981" duration="26000" />
+      <workItem from="1743193328171" duration="161000" />
+      <workItem from="1743193502361" duration="17000" />
+      <workItem from="1743193530480" duration="277000" />
+      <workItem from="1743193862486" duration="33000" />
+      <workItem from="1743193910852" duration="232000" />
+      <workItem from="1743194155776" duration="890000" />
+      <workItem from="1743195075766" duration="73000" />
+      <workItem from="1743195165959" duration="10877000" />
+      <workItem from="1743206646106" duration="257000" />
+      <workItem from="1743206918428" duration="2544000" />
+      <workItem from="1743209502058" duration="3724000" />
+      <workItem from="1743213661303" duration="518000" />
+      <workItem from="1743214226554" duration="34000" />
+      <workItem from="1743214275813" duration="260000" />
+      <workItem from="1743214554040" duration="73000" />
+      <workItem from="1743214658859" duration="3254000" />
+      <workItem from="1743245054872" duration="3237000" />
+      <workItem from="1743248342850" duration="2350000" />
+      <workItem from="1743254965700" duration="9712000" />
+      <workItem from="1743266668077" duration="53000" />
+      <workItem from="1743274722020" duration="4086000" />
+      <workItem from="1743278952187" duration="2751000" />
+    </task>
+    <task id="LOCAL-00001" summary="первый коммит">
+      <option name="closed" value="true" />
+      <created>1743258363580</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1743258363580</updated>
+    </task>
+    <task id="LOCAL-00002" summary="первый.2 коммит">
+      <option name="closed" value="true" />
+      <created>1743258391405</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1743258391405</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Реализовано сортировка, и поиск жилья">
+      <option name="closed" value="true" />
+      <created>1743278382350</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1743278382350</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="первый коммит" />
+    <MESSAGE value="первый.2 коммит" />
+    <MESSAGE value="Реализовано сортировка, и поиск жилья" />
+    <option name="LAST_COMMIT_MESSAGE" value="Реализовано сортировка, и поиск жилья" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/FinallProjectICH$test.coverage" NAME="test Coverage Results" MODIFIED="1743168838371" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>

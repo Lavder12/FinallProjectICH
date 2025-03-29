@@ -1,13 +1,14 @@
 {% extends "base.html" %}
+
 {% load static %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/post_det.css' %}">
 {% endblock extra_css %}
 
-{% block title %}О Нас{% endblock title %}
+{% block title %}{{ post.title }}{% endblock title %}
 
-{% block header %}О Нас{% endblock header %}
+{% block header %}{{ post.title }}{% endblock header %}
 
 {% block content %}
 <div class="post-container">
@@ -26,14 +27,23 @@
         </section>
 
         <section class="post-content">
-            <p><strong>Описание</strong></p>
-            <p>{{ post.content}}</p>
+            <p><strong>Описание:</strong></p>
+            <p>{{ post.content }}</p>
         </section>
 
         {% if post.image %}
             <div class="post-image">
                 <img src="{{ post.image.url }}" alt="Изображение для {{ post.title }}">
             </div>
+        {% endif %}
+
+        {% if post.is_rented %}
+            <p style="color: red;">Это объявление уже забронировано.</p>
+        {% else %}
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="rent-button">Арендовать это жильё</button>
+            </form>
         {% endif %}
 
         <a href="{% url 'find_room' %}" class="back-link">← Назад к списку</a>

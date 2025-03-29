@@ -13,7 +13,7 @@ def index(request):
 
 def find_room(request):
     form = SearchRoomForm(request.GET)
-    posts = Announcement.objects.all()
+    posts = Announcement.objects.filter(is_rented=False)  # Добавляем фильтрацию по аренде
 
     # Обрабатываем фильтры
     if form.is_valid():
@@ -61,7 +61,6 @@ def find_room(request):
     })
 
 
-
 @login_required
 def register_room(request):
     if request.method == "POST":
@@ -78,6 +77,15 @@ def register_room(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Announcement, pk=pk)
+
+    if request.method == 'POST':
+        if not post.is_rented:
+            post.is_rented = True
+            post.save()
+            return redirect('home')  # Страница успеха бронирования
+        else:
+            return render(request, 'post_detail.html', {'post': post, 'error': 'Это объявление уже забронировано.'})
+
     return render(request, 'post_detail.html', {'post': post})
 
 # def show_post(request):

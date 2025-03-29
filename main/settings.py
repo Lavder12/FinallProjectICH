@@ -2,14 +2,19 @@ from pathlib import Path
 import environ
 import os
 
+# Указываем базовую директорию проекта
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Подключение переменных окружения
 env = environ.Env()
 environ.Env.read_env(BASE_DIR / '.env')
 
-SECRET_KEY = env('SECRET_KEY')
-DEBUG = env.bool('DEBUG')
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+# Секретный ключ и отладка
+SECRET_KEY = env('SECRET_KEY', default='replace-me-with-your-secret-key')
+DEBUG = env.bool('DEBUG', default=True)
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['127.0.0.1', 'localhost'])
 
+# Установленные приложения
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -17,10 +22,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Ваши локальные приложения
     'web_room',
-    'users'
+    'users',
 ]
 
+# Промежуточное ПО (middleware)
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -31,12 +38,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Файл маршрутов
 ROOT_URLCONF = 'main.urls'
 
+# Настройки шаблонов
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Добавлен каталог шаблонов на случай, если он используется
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -49,8 +58,10 @@ TEMPLATES = [
     },
 ]
 
+# WSGI приложение
 WSGI_APPLICATION = 'main.wsgi.application'
 
+# Настройки базы данных
 DATABASES = {
     'default': {
         'ENGINE': env('ENGINE', default='django.db.backends.mysql'),
@@ -62,9 +73,7 @@ DATABASES = {
     }
 }
 
-# Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-
+# Валидация паролей
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -80,33 +89,28 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-
+# Локализация и часовой пояс
 LANGUAGE_CODE = 'ru'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
+# Настройки статических файлов
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'users/static'),
     os.path.join(BASE_DIR, 'web_room/static'),
-
 ]
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+# Настройки для загружаемых медиафайлов
+MEDIA_URL = '/media/'  # URL для загружаемых файлов
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Папка для медиафайлов
 
+# Тип первичного ключа по умолчанию
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+# Настройки авторизации
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'users:login'

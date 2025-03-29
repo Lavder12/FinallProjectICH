@@ -1,88 +1,85 @@
-/* Контейнер поста */
+
 .post-container {
-    max-width: 900px;  /* Ограничиваем максимальную ширину */
-    margin: 40px auto;
+    background: #fff;
+    max-width: 800px;
+    width: 100%;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* Убедитесь, что контент не выходит за пределы контейнера */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
 }
 
-/* Заголовок поста */
 .post-header {
-    text-align: center;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
     margin-bottom: 20px;
 }
 
 .post-title {
-    font-size: 2.5rem;
+    font-size: 24px;
     color: #333;
-    word-wrap: break-word; /* Делаем так, чтобы длинные слова обрывались */
+    margin: 0;
 }
 
 .post-date {
-    color: #777;
-    font-size: 1rem;
-}
-
-/* Детали поста */
-.post-details {
-    margin-bottom: 30px;
+    font-size: 14px;
+    color: #666;
 }
 
 .post-details p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    color: #444;
-    word-wrap: break-word; /* Для переноса длинных слов */
-}
-
-.post-details strong {
-    font-weight: bold;
-}
-
-/* Основной контент поста */
-.post-content {
-    font-size: 1.2rem;
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 20px;
-    word-wrap: break-word; /* Для переноса слов на новую строку */
+    margin: 10px 0;
+    font-size: 16px;
 }
 
 .post-content p {
-    text-align: justify;
+    font-size: 16px;
+    line-height: 1.5;
 }
 
-/* Изображение */
 .post-image {
     text-align: center;
-    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .post-image img {
     max-width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 5px;
 }
 
-/* Ссылка для возвращения назад */
+.rent-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.rent-button:hover {
+    background-color: #218838;
+}
+
 .back-link {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
+    margin-top: 15px;
+    color: #007bff;
     text-decoration: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: background-color 0.3s;
+    font-size: 16px;
 }
 
 .back-link:hover {
-    background-color: #0056b3;
+    text-decoration: underline;
 }
-.post-content{
-    text-align: center;
 
+/* Стиль для забронированных объявлений */
+.post-container p[style*="color: red"] {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
 }
