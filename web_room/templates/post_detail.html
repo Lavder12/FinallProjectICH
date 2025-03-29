@@ -10,26 +10,33 @@
 {% block header %}О Нас{% endblock header %}
 
 {% block content %}
-<div class="post">
-    <h1 class="post-title">{{ post.title }}</h1>
+<div class="post-container">
+    <article class="post">
+        <header class="post-header">
+            <h1 class="post-title">{{ post.title }}</h1>
+            <small class="post-date">Опубликовано: {{ post.created_at }}</small>
+        </header>
 
-    <div class="post-details">
-        <p><strong>Местоположение:</strong> {{ post.location }}</p>
-        <p><strong>Цена:</strong> {{ post.price }} ₽</p>
-        <p><strong>Количество комнат:</strong> {{ post.count_rooms }}</p>
-        <p><strong>Тип:</strong> {{ post.get_type_of_room_display }}</p>
-        <p><strong>Автор:</strong> {{ post.author.username }}</p>
-    </div>
+        <section class="post-details">
+            <p><strong>Местоположение:</strong> {{ post.location }}</p>
+            <p><strong>Цена:</strong> {{ post.price }} ₽</p>
+            <p><strong>Количество комнат:</strong> {{ post.count_rooms }}</p>
+            <p><strong>Тип:</strong> {{ post.get_type_of_room_display }}</p>
+            <p><strong>Автор:</strong> {{ post.author.username }}</p>
+        </section>
 
-    <p class="post-content">{{ post.content }}</p>
-    <small class="post-date">Опубликовано: {{ post.created_at }}</small>
+        <section class="post-content">
+            <p><strong>Описание</strong></p>
+            <p>{{ post.content}}</p>
+        </section>
 
-    {% if post.image %}
-        <div class="post-image">
-            <img src="{{ post.image.url }}" alt="Изображение для {{ post.title }}">
-        </div>
-    {% endif %}
+        {% if post.image %}
+            <div class="post-image">
+                <img src="{{ post.image.url }}" alt="Изображение для {{ post.title }}">
+            </div>
+        {% endif %}
 
-    <a href="{% url 'find_room' %}" class="back-link">← Назад к списку</a>
+        <a href="{% url 'find_room' %}" class="back-link">← Назад к списку</a>
+    </article>
 </div>
 {% endblock content %}

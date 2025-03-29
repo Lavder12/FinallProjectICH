@@ -10,42 +10,117 @@
 {% block header %}Список объявлений{% endblock header %}
 
 {% block content %}
-<h1 class="page-title">Список объявлений</h1>
+<h1 class="page-title">Найдите жилье для новой поездки</h1>
 
-{% if page_obj %}
-    {% for post in page_obj %}
-        <div class="post">
-            <h2 class="post-title">
-                <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
-            </h2>
-            <p class="post-content">{{ post.content|truncatewords:20 }}</p>
-            <p><strong>Автор:</strong> {{ post.author.username }}</p>
-            <p><strong>Цена:</strong> {{ post.price }} ₽</p>
-
-            {% if post.image %}
-                <div class="post-image">
-                    <img src="{{ post.image.url }}" alt="Изображение для {{ post.title }}" width="300">
-
-                </div>
-            {% endif %}
-
-            <small class="post-date">Опубликовано: {{ post.created_at }}</small>
+<!-- Форма поиска -->
+<form method="get" action="" class="search-form">
+    <div class="search-row">
+        <div class="search-input-container">
+            <label for="id_q"></label>
+            {{ form.q }}
         </div>
-    {% endfor %}
-{% else %}
-    <p class="no-posts">Объявлений пока нет.</p>
-{% endif %}
+        <div class="search-button-container">
+            <button type="submit" class="search-button">Искать</button>
+        </div>
+    </div>
+
+    <!-- Кнопка для раскрытия фильтров -->
+    <div class="advanced-toggle">
+        <button type="button" id="toggle-filters" class="toggle-button">Дополнительный поиск ▼</button>
+    </div>
+
+    <!-- Выпадающий блок -->
+    <div id="advanced-filters" class="advanced-filters">
+        <div class="search-row">
+            <div class="search-input-container">
+                <label for="id_location">Город</label>
+                {{ form.location }}
+            </div>
+            <div class="search-input-container">
+                <label for="id_rooms">Комнат</label>
+                {{ form.rooms }}
+            </div>
+            <div class="search-input-container">
+                <label for="id_type">Тип</label>
+                {{ form.type }}
+            </div>
+        </div>
+
+        <div class="search-row">
+            <div class="search-input-container small">
+                <label for="id_min_price">Цена от</label>
+                {{ form.min_price }}
+            </div>
+            <div class="search-input-container small">
+                <label for="id_max_price">Цена до</label>
+                {{ form.max_price }}
+            </div>
+        </div>
+
+        <!-- Сортировка -->
+        <div class="sort-container">
+            <label for="sort">Сортировать:</label>
+            <select id="sort" class="sort-select">
+                <option value="?{% url 'find_room' %}&sort=rating_desc" {% if sort == 'rating_desc' %}selected{% endif %}>⭐ Оценка ↓</option>
+                <option value="?{% url 'find_room' %}&sort=rating_asc" {% if sort == 'rating_asc' %}selected{% endif %}>⭐ Оценка ↑</option>
+                <option value="?{% url 'find_room' %}&sort=date_desc" {% if sort == 'date_desc' %}selected{% endif %}>📅 Дата ↓</option>
+                <option value="?{% url 'find_room' %}&sort=date_asc" {% if sort == 'date_asc' %}selected{% endif %}>📅 Дата ↑</option>
+                <option value="?{% url 'find_room' %}&sort=price_desc" {% if sort == 'price_desc' %}selected{% endif %}>💰 Цена ↓</option>
+                <option value="?{% url 'find_room' %}&sort=price_asc" {% if sort == 'price_asc' %}selected{% endif %}>💰 Цена ↑</option>
+            </select>
+        </div>
+    </div>
+</form>
+
+<script>
+    document.getElementById("toggle-filters").addEventListener("click", function () {
+        var filters = document.getElementById("advanced-filters");
+        filters.classList.toggle("show");
+        this.innerText = filters.classList.contains("show") ? "Дополнительный поиск ▲" : "Дополнительный поиск ▼";
+    });
+
+    document.getElementById("sort").addEventListener("change", function () {
+        window.location.href = this.value;
+    });
+</script>
+
+<!-- Объявления -->
+<div class="posts-grid">
+    {% if page_obj %}
+        {% for post in page_obj %}
+            <div class="post">
+                <h2 class="post-title">
+                    <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
+                </h2>
+                <p class="post-content">{{ post.content|truncatechars:170 }}</p>
+                <p><strong>⭐ Оценка:</strong> {{ post.rating }}</p>
+                <p><strong>💰 Цена:</strong> {{ post.price }} ₽</p>
+                <p><strong>📅 Дата:</strong> {{ post.created_at }}</p>
+
+                {% if post.image %}
+                    <div class="post-image">
+                        <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                    </div>
+                {% endif %}
+
+                <small class="post-date">Опубликовано: {{ post.created_at }}</small>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="no-posts">Объявлений не найдено.</p>
+    {% endif %}
+</div>
 
 <!-- Пагинация -->
 <div class="pagination">
     {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}" class="pagination-link">← Назад</a>
+        <a href="?page={{ page_obj.previous_page_number }}&sort={{ sort }}" class="pagination-link">← Назад</a>
     {% endif %}
 
     <span class="pagination-info">Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
 
     {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}" class="pagination-link">Вперёд →</a>
+        <a href="?page={{ page_obj.next_page_number }}&sort={{ sort }}" class="pagination-link">Вперёд →</a>
     {% endif %}
 </div>
 
