@@ -55,7 +55,7 @@ def find_room(request):
     posts = posts.order_by(sort_mapping.get(sort, "-created_at"))
 
     # Пагинация
-    paginator = Paginator(posts, 5)
+    paginator = Paginator(posts, 10)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 

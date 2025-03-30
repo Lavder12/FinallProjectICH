@@ -1,217 +1,195 @@
-.page-title {
-    text-align: center;
-    font-size: 28px;
-    color: #333;
-    margin: 20px 0;
+/* Сетка для карточек */
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Автоматическая настройка колонок */
+    gap: 20px; /* Расстояние между карточками */
+    margin-top: 30px;
 }
 
+/* Стиль для каждого объявления */
 .post {
-    max-width: 600px; /* Ограничиваем ширину блока */
-    margin: 20px auto; /* Центрируем */
-    padding: 15px;
-    border: 1px solid #ccc;
+    background-color: #fff;
     border-radius: 8px;
-    background-color: #f9f9f9;
-    word-wrap: break-word; /* Перенос длинных слов */
-    overflow-wrap: break-word; /* Альтернативный способ переноса */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    word-break: break-word; /* Чтобы предотвратить выход текста за пределы */
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    overflow: hidden; /* Чтобы элементы не выходили за пределы карточки */
 }
 
-.post h2 {
-    font-size: 22px;
+.post:hover {
+    transform: translateY(-5px); /* Легкое поднятие карточки при наведении */
+}
+
+/* Стиль для изображений */
+.post-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
     margin-bottom: 10px;
 }
 
-.post p {
-    font-size: 16px;
-    line-height: 1.5;
-    word-wrap: break-word; /* Перенос длинных слов */
-    overflow-wrap: break-word; /* Альтернативный способ переноса */
-    word-break: break-word; /* Предотвращает выход текста за границы */
-    margin: 0; /* Убираем лишние отступы */
-}
-
+/* Стиль заголовка */
 .post-title a {
-    font-size: 22px;
-    color: #172c3e;
+    font-size: 1.25rem;
+    color: #007BFF;
+    font-weight: bold;
     text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
 }
 
 .post-title a:hover {
-    text-decoration: underline;
+    color: #0056b3;
 }
 
+/* Описание и дополнительные данные */
 .post-content {
-    font-size: 16px;
-    color: #555;
-    margin: 10px 0;
-}
-
-.post-date {
-    font-size: 14px;
-    color: #777;
-    display: block;
-    margin-top: 10px;
-}
-
-.no-posts {
-    text-align: center;
-    font-size: 18px;
-    color: #666;
-    margin-top: 20px;
-}
-
-.pagination {
-    text-align: center;
-    margin: 20px 0;
-}
-
-.pagination-link {
-    display: inline-block;
-    padding: 10px 15px;
-    margin: 5px;
-    background: #007bff;
-    color: #fff;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
-.pagination-link:hover {
-    background: #0056b3;
-}
-
-.pagination-info {
-    font-size: 16px;
+    font-size: 1rem;
     color: #333;
-    margin: 0 10px;
+    margin-bottom: 15px;
 }
 
-.post-image {
-    text-align: center;
-    margin-top: 15px;
+.post p {
+    font-size: 1rem;
+    margin-bottom: 8px;
 }
 
-.post-image img {
-    max-width: 100%; /* Картинка будет ограничена шириной контейнера */
-    height: auto;  /* Сохраняем пропорции */
-    border-radius: 5px;
-    display: block;
-    margin: 0 auto;
-}
-/* Основные стили для формы поиска */
+/* Стили для формы поиска */
+./* Основной стиль для формы поиска */
 .search-form {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 15px;
-    background-color: #ffffff;
-    border-radius: 15px;
+    gap: 15px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 900px;  /* Увеличиваем максимальную ширину */
+    width: 100%;  /* Делаем форму растягивающейся по ширине */
 }
 
-/* Группировка строк */
+/* Строки поиска */
 .search-row {
     display: flex;
+    gap: 15px;
     flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
 }
 
-/* Стили для полей */
+/* Стиль для контейнера ввода */
 .search-input-container {
-    flex: 1 1 200px;
     display: flex;
     flex-direction: column;
-    font-size: 14px;
+    gap: 8px;
+    width: 100%;
+    max-width: 300px;  /* Максимальная ширина для каждого поля ввода */
 }
 
-/* Компактные поля для цены */
-.search-input-container.small {
-    flex: 1 1 120px;
+/* Метки для полей ввода */
+.search-input-container label {
+    font-weight: 600;
+    color: #333;
 }
 
-/* Поля ввода */
+/* Стиль для полей ввода и селектов */
 .search-input-container input,
 .search-input-container select {
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+    background-color: #fff;
     width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #000;
-    border-radius: 5px;
-    box-sizing: border-box;
 }
 
-/* Кнопка поиска */
+.search-input-container input:focus,
+.search-input-container select:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+/* Стиль для кнопки поиска */
+.search-button-container {
+    align-self: flex-end;
+}
+
 .search-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #4CAF50;
+    padding: 12px 25px;
+    background-color: #007BFF;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    font-size: 1.1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 100%;
 }
 
 .search-button:hover {
-    background-color: #a04550;
-}
-
-/* Кнопка раскрытия */
-.toggle-button {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.toggle-button:hover {
     background-color: #0056b3;
 }
 
-/* Выпадающий фильтр */
-.advanced-filters {
-    display: none; /* Скрыто по умолчанию */
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 10px;
-    margin-top: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+/* Стили для кнопки дополнительных фильтров */
+.advanced-toggle {
+    margin-top: 15px;
 }
 
-/* Анимация */
+.toggle-button {
+    cursor: pointer;
+    background-color: #eee;
+    border: none;
+    padding: 12px 20px;
+    color: #007BFF;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+    background-color: #d1d1d1;
+}
+
+.advanced-filters {
+    display: none;
+    margin-top: 20px;
+}
+
 .advanced-filters.show {
     display: block;
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-    .search-row {
-        flex-direction: column;
-    }
-
-    .search-button-container {
-        width: 100%;
-    }
-
-    .search-button {
-        width: 100%;
-    }
+/* Для маленьких фильтров в дополнительном поиске */
+.search-row .search-input-container.small {
+    width: 45%;
 }
+
+/* Стили для сортировки */
 .sort-container {
-        margin: 10px 0;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    .sort-select {
-        padding: 5px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-    }
+    margin-top: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+.sort-select {
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    width: 100%;
+    max-width: 250px;  /* Максимальная ширина для выпадающего списка */
+    transition: border-color 0.3s ease;
+}
+
+.sort-select:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+
+.search-text-cont{
+    text-align: center;
+
+
+}

@@ -42,8 +42,9 @@ body {
 }
 
 .logo-img {
-    width: 50px;
+    width: 150px;
     height: auto;
+    margin-right: 10px;
 }
 
 .nav {

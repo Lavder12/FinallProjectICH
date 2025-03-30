@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
+from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
@@ -44,8 +45,13 @@ def profile_view(request):
 
 @login_required
 def my_ads(request):
-    ads = Announcement.objects.filter(author=request.user)  # Фильтруем объявления по текущему пользователю
-    return render(request, 'users/my_ads.html', {'ads': ads})
+    ads_list = Announcement.objects.filter(author=request.user)  # Фильтруем объявления по текущему пользователю
+
+    paginator = Paginator(ads_list, 8)  # Ограничиваем 8 объявлениями на странице
+    page_number = request.GET.get('page')  # Получаем номер текущей страницы из GET-параметров
+    page_obj = paginator.get_page(page_number)  # Получаем соответствующую страницу
+
+    return render(request, 'users/my_ads.html', {'page_obj': page_obj})
 
 
 @login_required
@@ -126,7 +132,7 @@ def edit_ad(request, ad_id):
         form = AnnouncementEditForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()  # Сохраняем отредактированное объявление
-            return redirect('users:ad_post_det', ad_id=ad_id)
+            return redirect('users:my_ads')
     else:
         form = AnnouncementEditForm(instance=post)
 

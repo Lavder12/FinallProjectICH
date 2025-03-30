@@ -10,8 +10,9 @@
 {% block header %}Список объявлений{% endblock header %}
 
 {% block content %}
+    <div class="search-text-cont">
     <h1 class="page-title">Найдите жилье для новой поездки</h1>
-
+    </div>
     <!-- Форма поиска -->
     <form method="get" action="" class="search-form">
         <div class="search-row">
@@ -104,8 +105,8 @@
                     <h2 class="post-title">
                         <a href="{% url 'web_room:post_detail' pk=post.pk %}">{{ post.title }}</a>
                     </h2>
-                    <p class="post-content">{{ post.content|truncatechars:170 }}</p>
-                    <p><strong>⭐ Оценка:</strong> {{ post.avg_rating|default:"Нет рейтинга" }} </p>  <!-- Выводим рейтинг -->
+                    <p class="post-content">{{ post.content|slice:10 }}...</p>
+                    <p><strong>⭐ Оценка:</strong> {{ post.avg_rating|default:"Нет рейтинга" }} </p>
                     <p><strong>💰 Цена:</strong> {{ post.price }} ₽</p>
                     <p><strong>📅 Дата:</strong> {{ post.created_at }}</p>
 
