@@ -49,12 +49,13 @@ def my_ads(request):
 
 @login_required
 def rent_ad(request, ad_id):
-    ad = get_object_or_404(Announcement, id=ad_id, author=request.user)  # Находим объявление, принадлежащее текущему пользователю
-    if not ad.is_rented:  # Если объявление не занято
-        ad.is_rented = True  # Отмечаем его как арендованное
-        ad.renter = request.user  # Записываем арендатора (текущего пользователя)
-        ad.save()  # Сохраняем изменения
-    return redirect('users:my_ads')  # Перенаправляем пользователя обратно к списку его объявлений
+    ad = get_object_or_404(Announcement, id=ad_id)  # Получаем объявление по id
+    if not ad.is_rented:  # Проверяем, не арендовано ли уже
+        ad.is_rented = True  # Если не арендовано, помечаем как арендованное
+        ad.renter = request.user  # Записываем текущего пользователя как арендатора
+        ad.save()  # Сохраняем изменения в базе данных
+    return redirect('web_room:post_detail', ad.id)  # Перенаправляем на страницу объявления
+
 
 
 

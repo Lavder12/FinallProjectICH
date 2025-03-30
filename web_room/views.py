@@ -85,6 +85,7 @@ def post_detail(request, pk):
     if request.method == 'POST':
         if not post.is_rented:  # Проверяем, свободна ли комната
             post.is_rented = True
+            post.renter = request.user
             post.save()
             return redirect('web_room:home')  # Перенаправляем на главную при успешной аренде
         else:

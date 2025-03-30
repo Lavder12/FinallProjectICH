@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/post_det.css' %}">
+    <link rel="stylesheet" href="{% static 'css/post_det.css' %}">
 {% endblock extra_css %}
 
 {% block title %}{{ post.title }}{% endblock title %}
@@ -11,43 +11,45 @@
 {% block header %}{{ post.title }}{% endblock header %}
 
 {% block content %}
-<div class="post-container">
-    <article class="post">
-        <header class="post-header">
-            <h1 class="post-title">{{ post.title }}</h1>
-            <small class="post-date">Опубликовано: {{ post.created_at }}</small>
-        </header>
+    <div class="post-container">
+        <article class="post">
+            <header class="post-header">
+                <h1 class="post-title">{{ post.title }}</h1>
+                <small class="post-date">Опубликовано: {{ post.created_at }}</small>
+            </header>
 
-        <section class="post-details">
-            <p><strong>Местоположение:</strong> {{ post.location }}</p>
-            <p><strong>Цена:</strong> {{ post.price }} ₽</p>
-            <p><strong>Количество комнат:</strong> {{ post.count_rooms }}</p>
-            <p><strong>Тип:</strong> {{ post.get_type_of_room_display }}</p>
-            <p><strong>Автор:</strong> {{ post.author.username }}</p>
-        </section>
+            <section class="post-details">
+                <p><strong>Местоположение:</strong> {{ post.location }}</p>
+                <p><strong>Цена:</strong> {{ post.price }} ₽</p>
+                <p><strong>Количество комнат:</strong> {{ post.count_rooms }}</p>
+                <p><strong>Тип:</strong> {{ post.get_type_of_room_display }}</p>
+                <p><strong>Арендатор:</strong> {% if post.renter %} {{ post.renter.username }} {% else %} Нет
+                    арендатора {% endif %}</p>
+            </section>
 
-        <section class="post-content">
-            <p><strong>Описание:</strong></p>
-            <p>{{ post.content }}</p>
-        </section>
+            <section class="post-content">
+                <p><strong>Описание:</strong></p>
+                <p>{{ post.content }}</p>
+            </section>
 
-        {% if post.image %}
-            <div class="post-image">
-                <img src="{{ post.image.url }}" alt="Изображение для {{ post.title }}">
-            </div>
-        {% endif %}
+            {% if post.image %}
+                <div class="post-image">
+                    <img src="{{ post.image.url }}" alt="Изображение для {{ post.title }}">
+                </div>
+            {% endif %}
 
-        {% if post.is_rented %}
-            <p style="color: red;">Это объявление уже забронировано.</p>
-        {% else %}
-            <form method="post">
-                {% csrf_token %}
-                <button type="submit" class="rent-button">Арендовать это жильё</button>
-            </form>
-        {% endif %}
+            {% if post.is_rented %}
+                <p style="color: red;">Это объявление уже забронировано.</p>
+            {% else %}
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="rent-button">Арендовать это жильё</button>
+                </form>
 
-        <!-- Исправлена ссылка для возврата на список объявлений с учетом пространства имен -->
-        <a href="{% url 'web_room:find_room' %}" class="back-link">← Назад к списку</a>
-    </article>
-</div>
+            {% endif %}
+
+            <!-- Исправлена ссылка для возврата на список объявлений с учетом пространства имен -->
+            <a href="{% url 'web_room:find_room' %}" class="back-link">← Назад к списку</a>
+        </article>
+    </div>
 {% endblock content %}
