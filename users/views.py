@@ -54,7 +54,7 @@ def rent_ad(request, ad_id):
         ad.is_rented = True  # Отмечаем его как арендованное
         ad.renter = request.user  # Записываем арендатора (текущего пользователя)
         ad.save()  # Сохраняем изменения
-    return redirect('user:my_ads')  # Перенаправляем пользователя обратно к списку его объявлений
+    return redirect('users:my_ads')  # Перенаправляем пользователя обратно к списку его объявлений
 
 
 
@@ -66,5 +66,5 @@ def release_ad(request, ad_id):
         ad.is_rented = False  # Отмечаем его как свободное
         ad.renter = None  # Убираем арендатора
         ad.save()  # Сохраняем изменения
-    return redirect('user:my_ads')  # Перенаправляем пользователя обратно к списку его объявлений
+    return redirect('users:my_ads')  # Перенаправляем пользователя обратно к списку его объявлений
 
