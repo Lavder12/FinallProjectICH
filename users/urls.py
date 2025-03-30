@@ -15,5 +15,8 @@ urlpatterns = [
     path('ad_delete/<int:ad_id>/', views.delete_ad, name='delete_ad'),
     path('ad_remove_findroom/<int:ad_id>/', views.remove_from_findroom, name='remove_from_findroom'),
     path('ad_restore/<int:ad_id>/', views.restore_ad, name='restore_ad'),
+    path('edit_ad/<int:ad_id>/', views.edit_ad, name='edit_ad'),
+    path('rented_ads/', views.rented_ads, name='rented_ads'),
+    path('cancel_rent/<int:ad_id>/', views.cancel_rent, name='cancel_rent'),
 
 ]

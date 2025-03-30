@@ -6,5 +6,5 @@
     <p>Добро пожаловать {{ user.username }}</p>
 
     <a href="{% url 'users:my_ads'%}">Мои Обьявления</a>
-{#    <a href="{% url 'users:im_ads'%}">Моя Аренда</a>#}
+    <a href="{% url 'users:rented_ads' %}">Моя Аренда</a>
 {% endblock %}

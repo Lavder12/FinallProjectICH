@@ -10,7 +10,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 
 from web_room.models import Announcement
-from .forms import LoginUserForm, RegisterUserForm
+from .forms import LoginUserForm, RegisterUserForm, AnnouncementEditForm
 
 
 class LoginUser(LoginView):
@@ -111,3 +111,44 @@ def restore_ad(request, ad_id):
         ad.save()
 
     return redirect('users:my_ads')  # Перенаправляем обратно в список объявлений пользователя
+
+
+def edit_ad(request, ad_id):
+    # Получаем объявление по ID
+    post = get_object_or_404(Announcement, pk=ad_id)
+
+    # Если пользователь не является автором объявления, перенаправляем на страницу объявления
+    if request.user != post.author:
+        return redirect('users:ad_post_det', ad_id=ad_id)
+
+    if request.method == 'POST':
+        form = AnnouncementEditForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()  # Сохраняем отредактированное объявление
+            return redirect('users:ad_post_det', ad_id=ad_id)
+    else:
+        form = AnnouncementEditForm(instance=post)
+
+    return render(request, 'users/edit_ad.html', {'form': form, 'post': post})
+
+
+def rented_ads(request):
+    """Отображает объявления, которые арендовал текущий пользователь."""
+    rented_ads_list = Announcement.objects.filter(renter=request.user)
+
+    return render(request, 'users/rented_ads.html', {'rented_ads': rented_ads_list})
+
+
+
+
+@login_required
+def cancel_rent(request, ad_id):
+    """Отмена аренды объявления пользователем."""
+    ad = get_object_or_404(Announcement, id=ad_id)
+
+    if ad.renter == request.user:
+        ad.renter = None  # Освобождаем аренду
+        ad.is_rented = False  # Ставим статус "Свободно"
+        ad.save()
+
+    return redirect('users:rented_ads')  # Перенаправляем обратно на страницу арендованных объявлений

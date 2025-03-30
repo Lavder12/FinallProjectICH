@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 
+from web_room.models import Announcement
+
 
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
@@ -37,3 +39,11 @@ class RegisterUserForm(forms.ModelForm):
         if get_user_model().objects.filter(email=email).exists():
             raise forms.ValidationError("Такой E-mail уже существует!")
         return email
+
+
+
+
+class AnnouncementEditForm(forms.ModelForm):
+    class Meta:
+        model = Announcement
+        fields = ['title', 'content', 'location', 'price', 'count_rooms', 'type_of_room', 'image']

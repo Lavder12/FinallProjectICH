@@ -1,0 +1,40 @@
+{% extends 'web_room/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/my_ad.css' %}" type="text/css">
+{% endblock extra_css %}
+
+{% block title %}Арендованные объявления{% endblock %}
+
+{% block content %}
+    <h1>Объявления, которые вы арендуете</h1>
+
+    {% if rented_ads %}
+        {% for ad in rented_ads %}
+            <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
+                <a href="{% url 'users:ad_post_det' ad.id %}">{{ ad.title }}</a>
+                <p><strong>Местоположение:</strong> {{ ad.location }}</p>
+                <p><strong>Цена:</strong> {{ ad.price }} руб.</p>
+                <p><strong>Количество комнат:</strong> {{ ad.count_rooms }}</p>
+                <p><strong>Тип:</strong> {{ ad.get_type_of_room_display }}</p>
+                <p><strong>Статус:</strong> <span style="color: red;">Забронировано</span></p>
+                
+                {% if ad.image %}
+                    <img src="{{ ad.image.url }}" alt="Фото объявления" class="image-cont" style="max-width: 300px;">
+                {% endif %}
+
+                <!-- Кнопка отмены аренды -->
+                <form action="{% url 'users:cancel_rent' ad.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="cancel-button">Отменить аренду</button>
+                </form>
+
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Вы пока ничего не арендуете.</p>
+    {% endif %}
+
+    <a href="{% url 'users:profile' %}" class="back-link">← Назад к профилю</a>
+{% endblock %}

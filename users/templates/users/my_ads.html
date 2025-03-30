@@ -25,7 +25,6 @@
                     <img src="{{ ad.image.url }}" alt="Фото объявления" class="image-cont" style="max-width: 300px;">
                 {% endif %}
 
-                <!-- Убираем кнопку "Сдать в аренду" -->
                 {% if ad.is_rented %}
                     <p>Объявление забронировано.</p>
                 {% endif %}
@@ -38,15 +37,21 @@
                     </form>
                 {% else %}
                     <p>Это объявление скрыто из поиска.</p>
-                    <!-- Кнопка "Возврат в поиск" -->
                     <form action="{% url 'users:restore_ad' ad.id %}" method="post">
                         {% csrf_token %}
                         <button type="submit">Возвратить в поиск</button>
                     </form>
                 {% endif %}
+
+                <!-- Кнопка удаления объявления -->
+                <form action="{% url 'users:delete_ad' ad.id %}" method="post" onsubmit="return confirm('Вы уверены, что хотите удалить это объявление?');">
+                    {% csrf_token %}
+                    <button type="submit" style="color: #ffffff;">Удалить объявление</button>
+                </form>
             </div>
         {% endfor %}
     {% else %}
         <p>У вас пока нет объявлений.</p>
     {% endif %}
+        <a href="{% url 'users:profile' %}" class="back-link">← Назад к моим объявлениям</a>
 {% endblock %}

@@ -76,3 +76,17 @@ form {
     font-size: 1.2rem;
     color: #888;
 }
+
+.cancel-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.cancel-button:hover {
+    background-color: #cc0000;
+}

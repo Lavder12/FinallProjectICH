@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/post_det.css' %}">
+    <link rel="stylesheet" href="{% static 'css/post_det.css' %}">
 {% endblock extra_css %}
 
 {% block title %}{{ post.title }}{% endblock title %}
@@ -39,11 +39,6 @@
             <section class="post-actions">
                 {% if post.is_rented %}
                     <p class="rented-status">Это объявление уже забронировано.</p>
-                {% else %}
-                    <form method="post" class="rent-form">
-                        {% csrf_token %}
-                        <button type="submit" class="rent-button">Арендовать это жильё</button>
-                    </form>
                 {% endif %}
 
                 {% if not post.active %}
@@ -52,6 +47,11 @@
                         {% csrf_token %}
                         <button type="submit" class="restore-button">Вернуть в поиск</button>
                     </form>
+                {% endif %}
+
+                <!-- Ссылка на редактирование объявления -->
+                {% if post.author == user %}
+                    <a href="{% url 'users:edit_ad' post.id %}" class="edit-link">Редактировать объявление</a>
                 {% endif %}
             </section>
 
