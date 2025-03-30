@@ -1,0 +1,61 @@
+{% extends 'web_room/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/post_det.css' %}">
+{% endblock extra_css %}
+
+{% block title %}{{ post.title }}{% endblock title %}
+
+{% block header %}{{ post.title }}{% endblock header %}
+
+{% block content %}
+    <div class="post-container">
+        <article class="post">
+            <header class="post-header">
+                <h1 class="post-title">{{ post.title }}</h1>
+                <small class="post-date">Опубликовано: {{ post.created_at|date:"d.m.Y H:i" }}</small>
+            </header>
+
+            <section class="post-details">
+                <p><strong>Местоположение:</strong> {{ post.location }}</p>
+                <p><strong>Цена:</strong> {{ post.price }} ₽</p>
+                <p><strong>Количество комнат:</strong> {{ post.count_rooms }}</p>
+                <p><strong>Тип:</strong> {{ post.get_type_of_room_display }}</p>
+                <p><strong>Арендатор:</strong> {% if post.renter %} {{ post.renter.username }} {% else %} Нет арендатора {% endif %}</p>
+            </section>
+
+            <section class="post-content">
+                <p><strong>Описание:</strong></p>
+                <p>{{ post.content|linebreaks }}</p>
+            </section>
+
+            {% if post.image %}
+                <div class="post-image">
+                    <img src="{{ post.image.url }}" alt="Изображение для {{ post.title }}">
+                </div>
+            {% endif %}
+
+            <section class="post-actions">
+                {% if post.is_rented %}
+                    <p class="rented-status">Это объявление уже забронировано.</p>
+                {% else %}
+                    <form method="post" class="rent-form">
+                        {% csrf_token %}
+                        <button type="submit" class="rent-button">Арендовать это жильё</button>
+                    </form>
+                {% endif %}
+
+                {% if not post.active %}
+                    <!-- Кнопка для восстановления активности объявления -->
+                    <form method="post" action="{% url 'users:restore_ad' post.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="restore-button">Вернуть в поиск</button>
+                    </form>
+                {% endif %}
+            </section>
+
+            <a href="{% url 'users:my_ads' %}" class="back-link">← Назад к списку</a>
+        </article>
+    </div>
+{% endblock content %}

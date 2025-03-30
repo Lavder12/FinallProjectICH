@@ -14,7 +14,7 @@ def index(request):
 # Поиск комнаты
 def find_room(request):
     form = SearchRoomForm(request.GET)
-    posts = Announcement.objects.filter(is_rented=False)  # Фильтрация только доступных объявлений
+    posts = Announcement.objects.filter(is_rented=False, active=True)  # Фильтрация только доступных и активных объявлений
 
     # Применяем фильтры, если форма валидна
     if form.is_valid():

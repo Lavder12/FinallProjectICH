@@ -54,7 +54,7 @@ def rent_ad(request, ad_id):
         ad.is_rented = True  # Если не арендовано, помечаем как арендованное
         ad.renter = request.user  # Записываем текущего пользователя как арендатора
         ad.save()  # Сохраняем изменения в базе данных
-    return redirect('web_room:post_detail', ad.id)  # Перенаправляем на страницу объявления
+    return redirect('users:ad_post_det', ad.id)  # Перенаправляем на страницу объявления
 
 
 
@@ -69,3 +69,45 @@ def release_ad(request, ad_id):
         ad.save()  # Сохраняем изменения
     return redirect('users:my_ads')  # Перенаправляем пользователя обратно к списку его объявлений
 
+
+
+
+@login_required
+def ad_post_det(request, ad_id):
+    post = get_object_or_404(Announcement, pk=ad_id)
+    error = None
+
+    if request.method == 'POST':
+        if not post.is_rented:  # Проверяем, свободно ли объявление
+            post.is_rented = True
+            post.renter = request.user
+            post.save()
+            return redirect('users:ad_post_det', ad_id=post.pk)  # Возвращаем пользователя обратно
+        else:
+            error = 'Это объявление уже забронировано.'
+
+    return render(request, 'users/ad_post_det.html', {'post': post, 'error': error})
+
+
+def delete_ad(request, ad_id):
+    ad = get_object_or_404(Announcement, id=ad_id)
+    if request.user == ad.author:  # Проверяем, является ли пользователь владельцем
+        ad.delete()
+    return redirect('users:my_ads')  # Перенаправляем обратно на список объявлений
+
+def remove_from_findroom(request, ad_id):
+    ad = get_object_or_404(Announcement, id=ad_id)
+    if request.user == ad.author:
+        ad.active = False  # Предполагается, что у модели есть поле is_active
+        ad.save()
+    return redirect('users:my_ads')
+
+def restore_ad(request, ad_id):
+    ad = get_object_or_404(Announcement, id=ad_id)
+
+    # Проверяем, что объявление принадлежит текущему пользователю (если нужно)
+    if ad.author == request.user:
+        ad.active = True  # Восстанавливаем активность
+        ad.save()
+
+    return redirect('users:my_ads')  # Перенаправляем обратно в список объявлений пользователя

@@ -1,17 +1,19 @@
 {% extends 'web_room/base.html' %}
 {% load static %}
+
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/my_ad.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/my_ad.css' %}" type="text/css">
 {% endblock extra_css %}
+
 {% block title %}Ваш профиль{% endblock %}
 
 {% block content %}
- <h1>Мои объявления</h1>
+    <h1>Мои объявления</h1>
 
     {% if ads %}
         {% for ad in ads %}
             <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
-                <h2>{{ ad.title }}</h2>
+                 <a href="{% url 'users:ad_post_det' ad.id %}">{{ ad.title }}</a>
                 <p><strong>Местоположение:</strong> {{ ad.location }}</p>
                 <p><strong>Цена:</strong> {{ ad.price }} руб.</p>
                 <p><strong>Количество комнат:</strong> {{ ad.count_rooms }}</p>
@@ -20,18 +22,26 @@
                 <p><strong>Арендатор:</strong> {% if ad.renter %} {{ ad.renter.username }} {% else %} - {% endif %}</p>
 
                 {% if ad.image %}
-                    <img src="{{ ad.image.url }}" alt="Фото объявления" style="max-width: 300px;">
+                    <img src="{{ ad.image.url }}" alt="Фото объявления" class="image-cont" style="max-width: 300px;">
                 {% endif %}
 
-                {% if not ad.is_rented %}
-                    <form action="{% url 'users:rent_ad' ad.id %}" method="post">
+                <!-- Убираем кнопку "Сдать в аренду" -->
+                {% if ad.is_rented %}
+                    <p>Объявление забронировано.</p>
+                {% endif %}
+
+                <!-- Кнопка "Убрать из поиска" -->
+                {% if ad.active %}
+                    <form action="{% url 'users:remove_from_findroom' ad.id %}" method="post">
                         {% csrf_token %}
-                        <button type="submit">Сдать в аренду</button>
+                        <button type="submit">Убрать из поиска</button>
                     </form>
                 {% else %}
-                    <form action="{% url 'users:release_ad' ad.id %}" method="post">
+                    <p>Это объявление скрыто из поиска.</p>
+                    <!-- Кнопка "Возврат в поиск" -->
+                    <form action="{% url 'users:restore_ad' ad.id %}" method="post">
                         {% csrf_token %}
-                        <button type="submit">Освободить</button>
+                        <button type="submit">Возвратить в поиск</button>
                     </form>
                 {% endif %}
             </div>

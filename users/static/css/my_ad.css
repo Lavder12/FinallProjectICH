@@ -44,9 +44,9 @@ button:hover {
     background-color: #45a049;
 }
 
-/* Стили для изображений */
-img {
-    max-width: 300px;
+
+.image-cont {
+    max-width: 600px;
     border-radius: 8px;
     display: block;
     margin-top: 10px;
