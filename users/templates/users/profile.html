@@ -1,41 +1,10 @@
+<!-- users/profile.html -->
 {% extends 'web_room/base.html' %}
-
-{% block title %}Ваш профиль{% endblock title %}
+{% block title %}Ваш профиль{% endblock %}
 
 {% block content %}
-<h1>Добро пожаловать, {{ user.username }}!</h1>
-<hr>
+    <p>Добро пожаловать {{ user.username }}</p>
 
-<h2>Сдаваемые объявления</h2>
-<ul>
-    {% for announcement in my_announcements %}
-        <li>
-            <strong>{{ announcement.title }}</strong><br>
-            Цена: {{ announcement.price }} руб.<br>
-            Местоположение: {{ announcement.location }}<br>
-            Тип жилья: {{ announcement.get_type_of_room_display }}<br>
-            Забронировано: {% if announcement.is_rented %}Да{% else %}Нет{% endif %}<br>
-            <a href="{% url 'web_room:announcement_detail' announcement.pk %}">Детали</a>
-        </li>
-    {% empty %}
-        <p>У вас нет сдаваемых объявлений.</p>
-    {% endfor %}
-</ul>
-<hr>
-
-<h2>Арендованные объекты</h2>
-<ul>
-    {% for announcement in rented_announcements %}
-        <li>
-            <strong>{{ announcement.title }}</strong><br>
-            Цена: {{ announcement.price }} руб.<br>
-            Местоположение: {{ announcement.location }}<br>
-            Тип жилья: {{ announcement.get_type_of_room_display }}<br>
-            <a href="{% url 'web_room:announcement_detail' announcement.pk %}">Детали</a>
-        </li>
-    {% empty %}
-        <p>Вы не арендовали ни одного объекта.</p>
-    {% endfor %}
-</ul>
-<hr>
-{% endblock content %}
+    <a href="{% url 'users:my_ads'%}">Мои Обьявления</a>
+{#    <a href="{% url 'users:im_ads'%}">Моя Аренда</a>#}
+{% endblock %}

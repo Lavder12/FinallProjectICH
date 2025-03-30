@@ -112,5 +112,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Папка для медиафа
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Настройки авторизации
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'web_room:home'
 LOGIN_URL = 'users:login'

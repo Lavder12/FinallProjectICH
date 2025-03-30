@@ -3,12 +3,13 @@ from urllib.request import HTTPRedirectHandler
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 
-from web_room.models import Announcement, Reservation
+from web_room.models import Announcement
 from .forms import LoginUserForm, RegisterUserForm
 
 
@@ -37,13 +38,33 @@ def logout_user(request):
 
 @login_required
 def profile_view(request):
-    # Сдаваемые объявления пользователя
-    my_announcements = Announcement.objects.filter(author=request.user)  # Объявления текущего пользователя
+    return render(request, 'users/profile.html')
 
-    # Арендованные объекты
-    rented_announcements = Reservation.objects.filter(user=request.user).select_related('announcement')
 
-    return render(request, 'users/profile.html', {
-        'my_announcements': my_announcements,
-        'rented_announcements': [r.announcement for r in rented_announcements],  # Арендованные объявления
-    })
+@login_required
+def my_ads(request):
+    ads = Announcement.objects.filter(author=request.user)  # Фильтруем объявления по текущему пользователю
+    return render(request, 'users/my_ads.html', {'ads': ads})
+
+
+@login_required
+def rent_ad(request, ad_id):
+    ad = get_object_or_404(Announcement, id=ad_id, author=request.user)  # Находим объявление, принадлежащее текущему пользователю
+    if not ad.is_rented:  # Если объявление не занято
+        ad.is_rented = True  # Отмечаем его как арендованное
+        ad.renter = request.user  # Записываем арендатора (текущего пользователя)
+        ad.save()  # Сохраняем изменения
+    return redirect('user:my_ads')  # Перенаправляем пользователя обратно к списку его объявлений
+
+
+
+
+@login_required
+def release_ad(request, ad_id):
+    ad = get_object_or_404(Announcement, id=ad_id, author=request.user)  # Находим объявление, принадлежащее текущему пользователю
+    if ad.is_rented:  # Если объявление занято
+        ad.is_rented = False  # Отмечаем его как свободное
+        ad.renter = None  # Убираем арендатора
+        ad.save()  # Сохраняем изменения
+    return redirect('user:my_ads')  # Перенаправляем пользователя обратно к списку его объявлений
+

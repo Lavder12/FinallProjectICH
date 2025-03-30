@@ -72,7 +72,7 @@ def register_room(request):
             announcement = form.save(commit=False)
             announcement.author = request.user  # Добавляем автора из модели User
             announcement.save()
-            return redirect('home')  # Перенаправляем на главную страницу
+            return redirect('web_room:home')  # Перенаправляем на главную страницу
     else:
         form = AnnouncementForm()  # Пустая форма для GET-запросов
     return render(request, "web_room/register_room.html", {"form": form})
@@ -86,7 +86,7 @@ def post_detail(request, pk):
         if not post.is_rented:  # Проверяем, свободна ли комната
             post.is_rented = True
             post.save()
-            return redirect('home')  # Перенаправляем на главную при успешной аренде
+            return redirect('web_room:home')  # Перенаправляем на главную при успешной аренде
         else:
             return render(request, 'web_room/post_detail.html', {
                 'post': post,
@@ -95,8 +95,3 @@ def post_detail(request, pk):
 
     return render(request, 'web_room/post_detail.html', {'post': post})
 
-
-# Детали объявления (только просмотр)
-def announcement_detail(request, pk):
-    announcement = get_object_or_404(Announcement, pk=pk)
-    return render(request, 'web_room/announcement_detail.html', {'announcement': announcement})

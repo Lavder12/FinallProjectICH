@@ -8,5 +8,4 @@ urlpatterns = [
     path('', views.index, name='home'),  # Главная страница
     path('register_room/', views.register_room, name='register_room'),
     path('post/<int:pk>/', views.post_detail, name='post_detail'),
-    path('<int:pk>/', views.announcement_detail, name='announcement_detail'),
 ]

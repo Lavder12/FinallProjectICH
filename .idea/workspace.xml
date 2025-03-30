@@ -5,28 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7851674-29f0-4514-a113-cad4af2e3a93" name="Changes" comment="Ошибки исправлены">
-      <change afterPath="$PROJECT_DIR$/web_room/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3b90b675-a0b5-434a-9851-db7036528d87.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3b90b675-a0b5-434a-9851-db7036528d87.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/announcements/cs.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/announcements/dortmund.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/announcements/dortmund_QwlwTL4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/announcements/free-icon-curtain-12823489.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/announcements/joker.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/announcements/joker_rqo6fQ1.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/announcements/joker_tMO1f1b.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/announcements/изображение_2025-03-29_205706308.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/templates/users/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/templates/users/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/templates/users/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/templates/users/register_done.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/register_done.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_room/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/web_room/templates/web_room/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_room/templates/find_room.html" beforeDir="false" afterPath="$PROJECT_DIR$/web_room/templates/web_room/find_room.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_room/templates/main_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/web_room/templates/web_room/main_page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_room/templates/post_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/web_room/templates/web_room/post_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_room/templates/register_room.html" beforeDir="false" afterPath="$PROJECT_DIR$/web_room/templates/web_room/register_room.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web_room/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/web_room/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web_room/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/web_room/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web_room/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/web_room/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web_room/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/web_room/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,13 +27,18 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="CSS File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -81,7 +73,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
     "django.template.preview.state": "SHOW_EDITOR",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "test__1",
     "last_opened_file_path": "C:/Users/Home0/PycharmProjects/FinallProjectICH/web/static/img",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
@@ -178,7 +170,7 @@
       <workItem from="1743254965700" duration="9712000" />
       <workItem from="1743266668077" duration="53000" />
       <workItem from="1743274722020" duration="4086000" />
-      <workItem from="1743278952187" duration="6330000" />
+      <workItem from="1743278952187" duration="10701000" />
     </task>
     <task id="LOCAL-00001" summary="первый коммит">
       <option name="closed" value="true" />
@@ -212,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743281818915</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Ошибки исправлены">
+      <option name="closed" value="true" />
+      <created>1743285453934</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1743285453934</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

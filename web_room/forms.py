@@ -1,5 +1,5 @@
 from django import forms
-from .models import Announcement, Reservation
+from .models import Announcement
 
 
 class AnnouncementForm(forms.ModelForm):
@@ -39,11 +39,3 @@ class SearchRoomForm(forms.Form):
     q = forms.CharField(max_length=100, required=False, widget=forms.TextInput(
         attrs={'class': 'search-input', 'placeholder': 'Поиск '}), label='')
 
-class ReservationForm(forms.ModelForm):
-    class Meta:
-        model = Reservation
-        fields = ['start_date', 'end_date']
-        widgets = {
-            'start_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
-            'end_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
-        }
