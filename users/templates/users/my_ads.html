@@ -13,12 +13,15 @@
     {% if ads %}
         {% for ad in ads %}
             <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
-                 <a href="{% url 'users:ad_post_det' ad.id %}">{{ ad.title }}</a>
+{#                <p><strong</strong</p>{{ ad.title }}#}
+                <p><strong>Название</strong> {{ ad.title }}</p>
                 <p><strong>Местоположение:</strong> {{ ad.location }}</p>
                 <p><strong>Цена:</strong> {{ ad.price }} руб.</p>
                 <p><strong>Количество комнат:</strong> {{ ad.count_rooms }}</p>
                 <p><strong>Тип:</strong> {{ ad.get_type_of_room_display }}</p>
-                <p><strong>Статус:</strong> {% if ad.is_rented %} <span style="color: red;">Забронировано</span> {% else %} <span style="color: green;">Свободно</span> {% endif %}</p>
+                <p><strong>Статус:</strong> {% if ad.is_rented %}
+                    <span style="color: red;">Забронировано</span> {% else %}
+                    <span style="color: green;">Свободно</span> {% endif %}</p>
                 <p><strong>Арендатор:</strong> {% if ad.renter %} {{ ad.renter.username }} {% else %} - {% endif %}</p>
 
                 {% if ad.image %}
@@ -44,7 +47,8 @@
                 {% endif %}
 
                 <!-- Кнопка удаления объявления -->
-                <form action="{% url 'users:delete_ad' ad.id %}" method="post" onsubmit="return confirm('Вы уверены, что хотите удалить это объявление?');">
+                <form action="{% url 'users:delete_ad' ad.id %}" method="post"
+                      onsubmit="return confirm('Вы уверены, что хотите удалить это объявление?');">
                     {% csrf_token %}
                     <button type="submit" style="color: #ffffff;">Удалить объявление</button>
                 </form>
@@ -53,5 +57,5 @@
     {% else %}
         <p>У вас пока нет объявлений.</p>
     {% endif %}
-        <a href="{% url 'users:profile' %}" class="back-link">← Назад к моим объявлениям</a>
+    <a href="{% url 'users:profile' %}" class="back-link">← Назад к моим объявлениям</a>
 {% endblock %}

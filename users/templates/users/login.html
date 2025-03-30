@@ -13,7 +13,7 @@
   <input type="hidden" name="next" value="{{ next }}">
   {{ form.as_p }}
   <button type="submit">Вход</button>
-</form>
-<h1>Нет аккаунта ?</h1>
+  <h1>Нет аккаунта ?</h1>
 <a href="{% url 'users:register'%}">Регистрация</a>
+</form>
 {% endblock content %}

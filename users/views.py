@@ -9,7 +9,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 
-from web_room.models import Announcement
+from web_room.forms import ReviewForm
+from web_room.models import Announcement, Review
 from .forms import LoginUserForm, RegisterUserForm, AnnouncementEditForm
 
 
@@ -152,3 +153,30 @@ def cancel_rent(request, ad_id):
         ad.save()
 
     return redirect('users:rented_ads')  # Перенаправляем обратно на страницу арендованных объявлений
+
+
+@login_required
+def add_review(request, ad_id):
+    ad = get_object_or_404(Announcement, id=ad_id)
+
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.author = request.user
+            review.ad = ad
+            review.save()
+            return redirect('users:ad_post_det', ad_id=ad.id)
+        else:
+            print(form.errors)  # Для дебага
+    else:
+        form = ReviewForm()
+
+    return render(request, 'users/ad_post_det.html', {'form': form, 'post': ad})
+@login_required
+def delete_review(request, review_id):
+    """Удаление отзыва."""
+    review = get_object_or_404(Review, id=review_id, author=request.user)
+    ad_id = review.ad.id
+    review.delete()
+    return redirect('users:ad_post_det', ad_id=ad_id)

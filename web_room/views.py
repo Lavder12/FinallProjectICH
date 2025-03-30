@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.db.models import Avg
 from django.shortcuts import render, get_object_or_404, redirect
 
 from .forms import AnnouncementForm, SearchRoomForm
@@ -38,11 +39,14 @@ def find_room(request):
         if type_query:
             posts = posts.filter(type_of_room__icontains=type_query)
 
+    # Аннотируем средний рейтинг
+    posts = posts.annotate(avg_rating=Avg('reviews__rating'))
+
     # Обработка сортировки
     sort = request.GET.get("sort", "date_desc")
     sort_mapping = {
-        "rating_asc": "rating",
-        "rating_desc": "-rating",
+        "rating_asc": "avg_rating",
+        "rating_desc": "-avg_rating",
         "date_asc": "created_at",
         "date_desc": "-created_at",
         "price_asc": "price",
@@ -50,12 +54,11 @@ def find_room(request):
     }
     posts = posts.order_by(sort_mapping.get(sort, "-created_at"))
 
-    # Пагинация (по 5 объявлений на страницу)
+    # Пагинация
     paginator = Paginator(posts, 5)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
-    # Рендер результата
     return render(request, "web_room/find_room.html", {
         "form": form,
         "page_obj": page_obj,

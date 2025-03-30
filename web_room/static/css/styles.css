@@ -1,107 +1,107 @@
-/* Общие стили */
-
-html, body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+/* General reset and box-sizing */
+* {
     margin: 0;
     padding: 0;
-    text-align: center;
-    background-size: cover; /* Растягивает фон на весь экран */
-    background-position: center; /* Центрирует фон */
-    background-attachment: fixed; /* Фон остается на месте при прокрутке */
-    min-height: 100vh; /* Обеспечивает, что фон покроет всю высоту экрана */
-    height: 100%; /* Устанавливаем высоту для html и body, чтобы фон правильно растягивался */
+    box-sizing: border-box;
 }
 
-li {
-  display: inline-block;
-    padding: 10px;
-}
-/* Контейнер меню */
-div {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 5px;
-    border-radius: 12px;
-    margin: 1px auto;
-    width: 80%;
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
 }
 
-/* Ссылки навигации */
-div a {
-    text-decoration: none;
-    color: #000000;
-    font-weight: 600;
-    margin: 0 15px;
-    transition: color 0.3s ease-in-out;
+/* Wrapper */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-div a:hover {
-    color: #887171;
+/* Header styling */
+.header {
+    background-color: #ffffff;
+    padding: 15px 0;
+    color: #000102;
 }
 
-ul {
-    list-style: none;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-summary{
-    padding-top: 10px;
-    font-size: 1.2rem;
-}
-
-/* Заголовки */
-h1 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-top: 20px;
-}
-
-/* Контентный блок */
-.content {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 2022px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.logo {
+    display: flex;
+    align-items: center;
 }
 
 .logo-img {
-    padding: 0px;
-    width: auto; /* Автоматическая ширина, чтобы сохранить пропорции */
-    height: 100px; /* Установим ограничение по высоте */
-    max-width: 100%; /* Ограничиваем ширину на 100% от контейнера */
-    max-height: 100px; /* Максимальная высота 30px */
-    margin-right: 50px; /* Отступ справа */
+    width: 50px;
+    height: auto;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-}
-.content {
-  min-height: calc(100vh - 80px);
-}
-.wrapper{
-    min-height: 100%;
+.nav {
     display: flex;
-    flex-direction: column;
-}
-.main{
-    padding: 30px;
-    flex: 1 1 auto;
+    align-items: center;
+    gap: 15px;
 }
 
+.nav a {
+    color: #00090e;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.nav a:hover {
+    color: #1754ea;
+}
+
+/* Main content */
+.main {
+    flex-grow: 1;
+    padding: 20px 0;
+    background-color: #fff;
+}
+
+main .content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Footer styling */
 .footer {
-    position: relative;  /* Закрепляем футер внизу */
-    bottom: 0;  /* Привязываем футер к нижней части экрана */
-    left: 0;
-    width: 100%;  /* Ширина футера на весь экран */
-    background-color: #222;  /* Темный фон */
-    color: #fff;  /* Белый цвет текста */
-    text-align: center;  /* Выравнивание текста по центру */
-    padding: 15px 0;  /* Отступы сверху и снизу */
-    font-family: 'Arial', sans-serif;  /* Шрифт для текста */
-    font-size: 0.9rem;  /* Размер шрифта */
-    z-index: 1000;  /* Футер будет поверх контента */
-    margin-top: 100px;
+    background-color: #000000;
+    padding: 10px 0;
+    color: white;
+    text-align: center;
+    font-size: 0.9rem;
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav a {
+        font-size: 1rem;
+    }
+
+    .footer {
+        font-size: 0.8rem;
+    }
+}

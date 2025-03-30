@@ -1,41 +1,65 @@
+/*!* General page styling *!*/
+/*body {*/
+/*    font-family: Arial, sans-serif;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    background-color: #f4f4f4;*/
+/*    color: #333;*/
+/*}*/
 
+/* Post container styling */
 .post-container {
-    background: #fff;
-    max-width: 800px;
-    width: 100%;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
     margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
+/* Post header styling */
 .post-header {
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 15px;
     margin-bottom: 20px;
 }
 
 .post-title {
-    font-size: 24px;
-    color: #333;
+    font-size: 2rem;
     margin: 0;
+    color: #333;
 }
 
 .post-date {
-    font-size: 14px;
-    color: #666;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* Post details section */
+.post-details {
+    margin-bottom: 20px;
 }
 
 .post-details p {
-    margin: 10px 0;
-    font-size: 16px;
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+.post-details strong {
+    color: #000;
+}
+
+/* Post content section */
+.post-content {
+    margin-bottom: 20px;
 }
 
 .post-content p {
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 1rem;
+    line-height: 1.6;
 }
 
+/* Post image section */
 .post-image {
     text-align: center;
     margin-top: 20px;
@@ -43,43 +67,104 @@
 
 .post-image img {
     max-width: 100%;
-    height: auto;
-    border-radius: 5px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Rent button styling */
 .rent-button {
     display: block;
     width: 100%;
-    padding: 10px;
+    padding: 12px;
+    font-size: 1.2rem;
     background-color: #28a745;
     color: white;
-    font-size: 18px;
-    text-align: center;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s;
+    text-align: center;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
 }
 
 .rent-button:hover {
     background-color: #218838;
 }
 
+/* Red text for rented post */
+p[style="color: red;"] {
+    color: red;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* Reviews section */
+.reviews-section {
+    margin-top: 40px;
+}
+
+.reviews-section h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.reviews-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.reviews-section li {
+    background-color: #f9f9f9;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reviews-section li strong {
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.reviews-section li p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.reviews-section li small {
+    display: block;
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 10px;
+}
+
+/* Delete review button styling */
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+/* Back link styling */
 .back-link {
     display: inline-block;
-    margin-top: 15px;
+    margin-top: 30px;
     color: #007bff;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .back-link:hover {
     text-decoration: underline;
-}
-
-/* Стиль для забронированных объявлений */
-.post-container p[style*="color: red"] {
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
 }

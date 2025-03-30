@@ -47,7 +47,30 @@
                 </form>
 
             {% endif %}
+           <div class="reviews-section">
+                <h2>Отзывы</h2>
 
+                {% if post.reviews.exists %}
+                    <ul>
+                        {% for review in post.reviews.all %}
+                            <li>
+                                <strong>{{ review.author.username }}</strong> - {{ review.rating }}⭐
+                                <p>{{ review.comment }}</p>
+                                <small>Дата: {{ review.created_at|date:"d.m.Y H:i" }}</small>
+
+                                {% if review.author == user %}
+                                    <form action="{% url 'users:delete_review' review.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="delete-button">Удалить</button>
+                                    </form>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Пока нет отзывов.</p>
+                {% endif %}
+           </div>
             <!-- Исправлена ссылка для возврата на список объявлений с учетом пространства имен -->
             <a href="{% url 'web_room:find_room' %}" class="back-link">← Назад к списку</a>
         </article>

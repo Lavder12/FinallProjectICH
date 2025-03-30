@@ -61,22 +61,22 @@
             <div class="sort-container">
                 <label for="sort">Сортировать:</label>
                 <select id="sort" class="sort-select">
-                    <option value="?{% url 'web_room:find_room' %}&sort=rating_desc"
+                    <option value="?{% if request.GET.sort %}{{ request.GET.sort }}&{% endif %}sort=rating_desc"
                             {% if sort == 'rating_desc' %}selected{% endif %}>⭐ Оценка ↓
                     </option>
-                    <option value="?{% url 'web_room:find_room' %}&sort=rating_asc"
+                    <option value="?{% if request.GET.sort %}{{ request.GET.sort }}&{% endif %}sort=rating_asc"
                             {% if sort == 'rating_asc' %}selected{% endif %}>⭐ Оценка ↑
                     </option>
-                    <option value="?{% url 'web_room:find_room' %}&sort=date_desc"
+                    <option value="?{% if request.GET.sort %}{{ request.GET.sort }}&{% endif %}sort=date_desc"
                             {% if sort == 'date_desc' %}selected{% endif %}>📅 Дата ↓
                     </option>
-                    <option value="?{% url 'web_room:find_room' %}&sort=date_asc"
+                    <option value="?{% if request.GET.sort %}{{ request.GET.sort }}&{% endif %}sort=date_asc"
                             {% if sort == 'date_asc' %}selected{% endif %}>📅 Дата ↑
                     </option>
-                    <option value="?{% url 'web_room:find_room' %}&sort=price_desc"
+                    <option value="?{% if request.GET.sort %}{{ request.GET.sort }}&{% endif %}sort=price_desc"
                             {% if sort == 'price_desc' %}selected{% endif %}>💰 Цена ↓
                     </option>
-                    <option value="?{% url 'web_room:find_room' %}&sort=price_asc"
+                    <option value="?{% if request.GET.sort %}{{ request.GET.sort }}&{% endif %}sort=price_asc"
                             {% if sort == 'price_asc' %}selected{% endif %}>💰 Цена ↑
                     </option>
                 </select>
@@ -103,10 +103,9 @@
                 <div class="post">
                     <h2 class="post-title">
                         <a href="{% url 'web_room:post_detail' pk=post.pk %}">{{ post.title }}</a>
-
                     </h2>
                     <p class="post-content">{{ post.content|truncatechars:170 }}</p>
-                    <p><strong>⭐ Оценка:</strong> {{ post.rating }}</p>
+                    <p><strong>⭐ Оценка:</strong> {{ post.avg_rating|default:"Нет рейтинга" }} </p>  <!-- Выводим рейтинг -->
                     <p><strong>💰 Цена:</strong> {{ post.price }} ₽</p>
                     <p><strong>📅 Дата:</strong> {{ post.created_at }}</p>
 

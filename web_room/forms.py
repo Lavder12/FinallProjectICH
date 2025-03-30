@@ -1,5 +1,5 @@
 from django import forms
-from .models import Announcement
+from .models import Announcement, Review
 
 
 class AnnouncementForm(forms.ModelForm):
@@ -39,3 +39,14 @@ class SearchRoomForm(forms.Form):
     q = forms.CharField(max_length=100, required=False, widget=forms.TextInput(
         attrs={'class': 'search-input', 'placeholder': 'Поиск '}), label='')
 
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['rating', 'comment']
+
+    rating = forms.ChoiceField(
+        choices=[(i, f"{i}⭐") for i in range(1, 6)],
+        required=True,  # Обязательно к заполнению
+        widget=forms.Select()
+    )

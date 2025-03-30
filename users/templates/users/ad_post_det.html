@@ -22,7 +22,8 @@
                 <p><strong>Цена:</strong> {{ post.price }} ₽</p>
                 <p><strong>Количество комнат:</strong> {{ post.count_rooms }}</p>
                 <p><strong>Тип:</strong> {{ post.get_type_of_room_display }}</p>
-                <p><strong>Арендатор:</strong> {% if post.renter %} {{ post.renter.username }} {% else %} Нет арендатора {% endif %}</p>
+                <p><strong>Арендатор:</strong> {% if post.renter %} {{ post.renter.username }} {% else %} Нет
+                    арендатора {% endif %}</p>
             </section>
 
             <section class="post-content">
@@ -36,20 +37,60 @@
                 </div>
             {% endif %}
 
-            <section class="post-actions">
-                {% if post.is_rented %}
-                    <p class="rented-status">Это объявление уже забронировано.</p>
+            <!-- 🔹 Вставляем сюда отзывы -->
+            <div class="reviews-section">
+                <h2>Отзывы</h2>
+
+                {% if post.reviews.exists %}
+                    <ul>
+                        {% for review in post.reviews.all %}
+                            <li>
+                                <strong>{{ review.author.username }}</strong> - {{ review.rating }}⭐
+                                <p>{{ review.comment }}</p>
+                                <small>Дата: {{ review.created_at|date:"d.m.Y H:i" }}</small>
+
+                                {% if review.author == user %}
+                                    <form action="{% url 'users:delete_review' review.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="delete-button">Удалить</button>
+                                    </form>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Пока нет отзывов.</p>
                 {% endif %}
 
+                <h3>Оставить отзыв</h3>
+                <form action="{% url 'users:add_review' post.id %}" method="post">
+                    {% csrf_token %}
+
+                    <label for="rating">Оценка:</label>
+                    <select name="rating" id="rating" required>
+                        <option value="" disabled selected>Выберите рейтинг</option>
+                        <option value="1">1⭐</option>
+                        <option value="2">2⭐</option>
+                        <option value="3">3⭐</option>
+                        <option value="4">4⭐</option>
+                        <option value="5">5⭐</option>
+                    </select>
+
+                    {{ form.comment }}
+
+                    <button type="submit" class="submit-button">Отправить</button>
+                </form>
+            </div>
+            <!-- 🔹 Конец блока отзывов -->
+
+            <section class="post-actions">
                 {% if not post.active %}
-                    <!-- Кнопка для восстановления активности объявления -->
                     <form method="post" action="{% url 'users:restore_ad' post.id %}">
                         {% csrf_token %}
                         <button type="submit" class="restore-button">Вернуть в поиск</button>
                     </form>
                 {% endif %}
 
-                <!-- Ссылка на редактирование объявления -->
                 {% if post.author == user %}
                     <a href="{% url 'users:edit_ad' post.id %}" class="edit-link">Редактировать объявление</a>
                 {% endif %}
