@@ -1,0 +1,17 @@
+{% extends 'web_room/base.html' %}
+{% block title %}Ваш профиль{% endblock %}
+
+{% block content %}
+    <h2>История просмотров</h2>
+    <ul>
+        {% for item in history %}
+            <li>
+                <a href="{% url 'web_room:post_detail' item.post.id %}">
+                    {{ item.post.title }}
+                </a> — просмотрено {{ item.viewed_at }}
+            </li>
+        {% empty %}
+            <li>Вы еще не смотрели объявления.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

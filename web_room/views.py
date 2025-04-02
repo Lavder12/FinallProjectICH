@@ -2,9 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Avg
 from django.shortcuts import render, get_object_or_404, redirect
-
+from users.models import ViewHistory
 from .forms import AnnouncementForm, SearchRoomForm
-from .models import Announcement
+from .models import Announcement, RentalHistory
+from django.utils.timezone import now
 
 
 # Главная страница
@@ -86,16 +87,42 @@ def post_detail(request, pk):
     post = get_object_or_404(Announcement, pk=pk)
 
     if request.method == 'POST':
-        if not post.is_rented:  # Проверяем, свободна ли комната
+        if not post.is_rented:
             post.is_rented = True
             post.renter = request.user
+            post.rented_at = now()
             post.save()
-            return redirect('web_room:home')  # Перенаправляем на главную при успешной аренде
-        else:
-            return render(request, 'web_room/post_detail.html', {
-                'post': post,
-                'error': 'Это объявление уже забронировано.'
-            })
+
+            # Записываем аренду в историю
+            RentalHistory.objects.create(user=request.user, announcement=post, rented_at=now())
+
+            return redirect('web_room:home')
+
+        elif post.is_rented and post.renter == request.user:
+            # Отмена аренды
+            post.is_rented = False
+            post.renter = None
+            post.rented_at = None
+            post.save()
+
+            # Записываем дату отмены аренды
+            history_entry = RentalHistory.objects.filter(user=request.user, announcement=post).last()
+            if history_entry and history_entry.canceled_at is None:
+                history_entry.canceled_at = now()
+                history_entry.save()
+
+            return redirect('web_room:home')
 
     return render(request, 'web_room/post_detail.html', {'post': post})
 
+@login_required
+def view_history(request):
+    history = ViewHistory.objects.filter(user=request.user).select_related('post')[:10]
+    return render(request, 'users/ad_history.html', {'history': history})
+
+
+@login_required
+def rental_history(request):
+    history = RentalHistory.objects.filter(user=request.user).order_by('-rented_at')
+
+    return render(request, 'users/rental_history.html', {'history': history})

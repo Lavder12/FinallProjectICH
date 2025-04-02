@@ -1,0 +1,24 @@
+
+<!-- users/profile.html -->
+{% extends 'web_room/base.html' %}
+{% block title %}Ваш профиль{% endblock %}
+
+{% block content %}
+    <h2>Моя история аренды</h2>
+
+    {% if history %}
+        <ul>
+            {% for item in history %}
+                <li>
+                    <a href="{% url 'web_room:post_detail' item.announcement.id %}">{{ item.announcement.title }}</a>
+                    — арендовано {{ item.rented_at|date:"d.m.Y H:i" }}
+                    {% if item.canceled_at %}
+                        (отменено {{ item.canceled_at|date:"d.m.Y H:i" }})
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Вы еще ничего не арендовали.</p>
+    {% endif %}
+{% endblock %}

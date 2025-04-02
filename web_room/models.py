@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 
 
 class Announcement(models.Model):
@@ -11,7 +12,7 @@ class Announcement(models.Model):
 
     title = models.CharField(max_length=100, verbose_name="Название")
     content = models.TextField(verbose_name="Описание")
-    location = models.CharField(max_length=100, verbose_name="Местоположение")
+    location = models.CharField(max_length=100, verbose_name="Адрес")
     price = models.IntegerField(verbose_name="Цена")
     count_rooms = models.IntegerField(verbose_name="Количество комнат")
 
@@ -25,16 +26,23 @@ class Announcement(models.Model):
     active = models.BooleanField(default=True, verbose_name="Активное объявление")
     is_rented = models.BooleanField(default=False, verbose_name="Забронировано")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    rented_at = models.DateTimeField(null=True, blank=True, verbose_name="Дата аренды")  # Новое поле
     image = models.ImageField(upload_to="announcements/", blank=True, null=True, verbose_name="Фото")
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Автор",
-                               related_name="created_announcements")
+
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name="Автор",
+        related_name="created_announcements"
+    )
 
     renter = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name="Арендатор"
+        verbose_name="Арендатор",
+        related_name="rented_rooms"  # Новый related_name
     )
 
     class Meta:
@@ -47,9 +55,6 @@ class Announcement(models.Model):
         return f"{self.title} - {self.location} ({self.get_type_of_room_display()}) | {status}"
 
 
-from django.db import models
-from django.contrib.auth.models import User
-
 class Review(models.Model):
     ad = models.ForeignKey(Announcement, on_delete=models.CASCADE, related_name="reviews")
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -57,9 +62,18 @@ class Review(models.Model):
     comment = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
-
     class Meta:
         unique_together = ('ad', 'author')  # Один пользователь - один отзыв
 
     def __str__(self):
         return f"Отзыв {self.author} - {self.rating}⭐"
+
+
+class RentalHistory(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Арендатор", related_name="rental_history")
+    announcement = models.ForeignKey("Announcement", on_delete=models.CASCADE, verbose_name="Объявление")
+    rented_at = models.DateTimeField(default=now, verbose_name="Дата аренды")
+    canceled_at = models.DateTimeField(null=True, blank=True, verbose_name="Дата отмены аренды")
+
+    def __str__(self):
+        return f"{self.user.username} - {self.announcement.title} (Арендовано: {self.rented_at})"

@@ -6,5 +6,7 @@
     <p>Добро пожаловать {{ user.username }}</p>
 
     <a href="{% url 'users:my_ads'%}">Мои Обьявления</a>
-    <a href="{% url 'users:rented_ads' %}">Моя Аренда</a>
+    <p><a href="{% url 'users:rented_ads' %}">Моя Аренда</a>
+    <p><a href="{% url 'web_room:ad_history' %}">История просмотров</a>
+    <p><a href="{% url 'web_room:rent_history' %}">История Аренды</a>
 {% endblock %}
