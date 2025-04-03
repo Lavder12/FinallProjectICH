@@ -86,6 +86,10 @@ def register_room(request):
 def post_detail(request, pk):
     post = get_object_or_404(Announcement, pk=pk)
 
+    # Записываем факт просмотра объявления
+    if request.user.is_authenticated:
+        ViewHistory.objects.get_or_create(user=request.user, post=post, defaults={"viewed_at": now()})
+
     if request.method == 'POST':
         if not post.is_rented:
             post.is_rented = True
@@ -117,7 +121,7 @@ def post_detail(request, pk):
 
 @login_required
 def view_history(request):
-    history = ViewHistory.objects.filter(user=request.user).select_related('post')[:10]
+    history = ViewHistory.objects.filter(user=request.user).select_related('post')[:100]
     return render(request, 'users/ad_history.html', {'history': history})
 
 

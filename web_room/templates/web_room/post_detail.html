@@ -20,7 +20,7 @@
 
             <section class="post-details">
                 <p><strong>Местоположение:</strong> {{ post.location }}</p>
-                <p><strong>Цена:</strong> {{ post.price }} ₽</p>
+                <p><strong>Цена:</strong> {{ post.price }} €</p>
                 <p><strong>Количество комнат:</strong> {{ post.count_rooms }}</p>
                 <p><strong>Тип:</strong> {{ post.get_type_of_room_display }}</p>
                 <p><strong>Арендатор:</strong> {% if post.renter %} {{ post.renter.username }} {% else %} Нет

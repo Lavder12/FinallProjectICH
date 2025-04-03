@@ -1,5 +1,4 @@
 from urllib.request import HTTPRedirectHandler
-
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -64,19 +63,15 @@ def rent_ad(request, ad_id):
     return redirect('users:ad_post_det', ad.id)  # Перенаправляем на страницу объявления
 
 
-
-
-
 @login_required
 def release_ad(request, ad_id):
-    ad = get_object_or_404(Announcement, id=ad_id, author=request.user)  # Находим объявление, принадлежащее текущему пользователю
+    ad = get_object_or_404(Announcement, id=ad_id,
+                           author=request.user)  # Находим объявление, принадлежащее текущему пользователю
     if ad.is_rented:  # Если объявление занято
         ad.is_rented = False  # Отмечаем его как свободное
         ad.renter = None  # Убираем арендатора
         ad.save()  # Сохраняем изменения
     return redirect('users:my_ads')  # Перенаправляем пользователя обратно к списку его объявлений
-
-
 
 
 @login_required
@@ -102,12 +97,14 @@ def delete_ad(request, ad_id):
         ad.delete()
     return redirect('users:my_ads')  # Перенаправляем обратно на список объявлений
 
+
 def remove_from_findroom(request, ad_id):
     ad = get_object_or_404(Announcement, id=ad_id)
     if request.user == ad.author:
         ad.active = False  # Предполагается, что у модели есть поле is_active
         ad.save()
     return redirect('users:my_ads')
+
 
 def restore_ad(request, ad_id):
     ad = get_object_or_404(Announcement, id=ad_id)
@@ -146,8 +143,6 @@ def rented_ads(request):
     return render(request, 'users/rented_ads.html', {'rented_ads': rented_ads_list})
 
 
-
-
 @login_required
 def cancel_rent(request, ad_id):
     """Отмена аренды объявления пользователем."""
@@ -179,9 +174,10 @@ def add_review(request, ad_id):
         form = ReviewForm()
 
     return render(request, 'users/ad_post_det.html', {'form': form, 'post': ad})
+
+
 @login_required
-def delete_review(request, review_id):
-    """Удаление отзыва."""
+def delete_review(request, review_id): ##Удалять отзыв
     review = get_object_or_404(Review, id=review_id, author=request.user)
     ad_id = review.ad.id
     review.delete()
